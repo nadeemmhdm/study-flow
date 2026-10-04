@@ -18,7 +18,7 @@ $major=[int](node -p "process.versions.node.split('.')[0]")
 if($major -lt 20){ Fail "SF-1001" "Node.js 20+ is required. Current: $(node -v)" }
 Write-Host "Prerequisites ready: Node $(node -v), npm $(npm -v), $(git --version)"
 try {
- if(Test-Path (Join-Path $Dir ".git")){ Set-Location $Dir; if((git status --porcelain)){Fail "SF-3002" "Local changes detected; refusing automatic update."}; git pull --ff-only origin main } else { git clone $Repo $Dir; Set-Location $Dir }
+ if(Test-Path (Join-Path $Dir ".git")){ Set-Location $Dir;  $changes=@(git status --porcelain | Where-Object { $_ -notmatch "^.. package-lock\.json$" }); if($changes.Count -gt 0){Fail "SF-3002" "Local source changes detected; refusing automatic update."}; git checkout -- package-lock.json 2>$null; git pull --ff-only origin main } else { git clone $Repo $Dir; Set-Location $Dir }
  if($LASTEXITCODE -ne 0){throw "[SF-3004] Repository setup/update failed."}
  npm install; if($LASTEXITCODE -ne 0){throw "[SF-2001] Dependency installation failed."}
  npm run build; if($LASTEXITCODE -ne 0){throw "[SF-2002] Build failed."}
