@@ -40,7 +40,7 @@ The Settings interface includes provider presets so users normally do not need t
 | OpenAI | API key | Uses the built-in OpenAI endpoint and default model |
 | Groq Cloud | API key | Uses the built-in Groq OpenAI-compatible endpoint and default model |
 | OpenRouter Cloud | API key | Uses the built-in OpenRouter endpoint and default model |
-| Ollama (Local) | No key by default | Connects to the local OpenAI-compatible Ollama endpoint |
+| Ollama Cloud | Ollama API key | Uses the direct Ollama Cloud OpenAI-compatible API (`https://ollama.com/v1`) and a cloud model |
 | Custom AI Provider | Provider-dependent | User supplies endpoint, model and optional API key |
 
 Preset providers expose a **custom model** option. When disabled, Study Flow uses its maintained default model identifier. When enabled, the user can enter another model supported by that provider.
