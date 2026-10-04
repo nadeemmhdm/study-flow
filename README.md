@@ -1,2 +1,23 @@
-# study-flow
-AI-powered visual learning platform that transforms any topic into structured, interactive learning trees for students and teachers.
+# Study Flow
+
+A clean, local-first learning-path builder built with React, TypeScript and Vite.
+
+## Features
+- Topic + optional learning goal
+- Select 1–10 subtopics
+- Interactive completion tracking
+- Local browser persistence
+- Responsive desktop/mobile interface
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Production build
+
+```bash
+npm run build
+```
