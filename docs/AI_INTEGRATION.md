@@ -29,3 +29,20 @@ Study Flow asks the provider for strict JSON containing exactly the requested nu
 ## Privacy
 
 Topic text and the optional description are sent to the configured AI provider when **Build with AI** is selected. Users should review their provider's data policy before sending sensitive material.
+
+
+## Provider presets
+
+The Settings interface includes provider presets so users normally do not need to know endpoint or model identifiers.
+
+| Provider | Authentication | Default behavior |
+|---|---|---|
+| OpenAI | API key | Uses the built-in OpenAI endpoint and default model |
+| Groq Cloud | API key | Uses the built-in Groq OpenAI-compatible endpoint and default model |
+| OpenRouter Cloud | API key | Uses the built-in OpenRouter endpoint and default model |
+| Ollama (Local) | No key by default | Connects to the local OpenAI-compatible Ollama endpoint |
+| Custom AI Provider | Provider-dependent | User supplies endpoint, model and optional API key |
+
+Preset providers expose a **custom model** option. When disabled, Study Flow uses its maintained default model identifier. When enabled, the user can enter another model supported by that provider.
+
+Custom providers must expose an OpenAI-compatible `/chat/completions` API and permit browser CORS requests.
