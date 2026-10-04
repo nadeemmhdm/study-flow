@@ -8,6 +8,7 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -20,3 +21,20 @@ jobs:
       - run: npm run build
       - run: npm run sf -- doctor
       - run: npm audit --omit=dev --audit-level=high
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Secret pattern scan
+        shell: bash
+        run: |
+          if grep -RIE --exclude-dir=.git --exclude-dir=node_modules '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|ghp_[A-Za-z0-9]{30,}|sk-[A-Za-z0-9]{32,})' .; then
+            echo "[SF-4001] Potential secret detected"
+            exit 1
+          fi
