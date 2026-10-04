@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import{execFileSync,spawnSync}from"node:child_process";import{existsSync,readFileSync}from"node:fs";import{resolve}from"node:path";
+import{execFileSync,spawnSync}from"node:child_process";import{existsSync,readFileSync}from"node:fs";import{resolve,dirname}from"node:path";import{fileURLToPath}from"node:url";
 const root=resolve(new URL("..",import.meta.url).pathname.replace(/^\/([A-Za-z]:)/,"$1:"));const pkg=JSON.parse(readFileSync(resolve(root,"package.json"),"utf8"));
 const C={NODE:"SF-1001",NPM:"SF-1002",INSTALL:"SF-2001",BUILD:"SF-2002",GIT:"SF-3001",DIRTY:"SF-3002",NETWORK:"SF-3003",UPDATE:"SF-3004",UNKNOWN:"SF-9000"};
 const die=(code,msg)=>{console.error("\n["+code+"] "+msg+"\nRun: npm run sf -- doctor");process.exit(1)};const has=x=>spawnSync(x,["--version"],{stdio:"ignore",shell:process.platform==="win32"}).status===0;
